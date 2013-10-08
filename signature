@@ -1,0 +1,85 @@
+import ddf.minim.*;   // Import the library
+Minim minim;          // Declare the Minim variable
+AudioSample sample;   // Declare AudioSample (for short samples)
+
+// these are used for controlling the background color
+int red=0;
+int green=0;
+int blue=0;
+int greenfill=0;
+int bluefill=0;
+int redfill=0;
+
+void setup() {
+  size(800, 200);
+  // Instantiate Minim
+  minim = new Minim(this);
+  // Load the soundfiles (from the data folder)
+  sample = minim.loadSample("horn.wav");
+  // Set the gain of the foghorn a bit lower
+  sample.setGain(-35);
+}
+
+
+
+void draw() {
+  // background color
+  background(red, green, blue);
+  // map the mouse coordinates to control the gain
+
+  textSize(45);
+  fill(redfill, bluefill, greenfill);
+  text("Olli", 10, 30); 
+  text("Romppanen", 10, 60);
+  text("Helsinki", 10, 90);
+}
+
+void keyPressed() {
+
+
+  if (key == 's') {
+  }
+  else if (key == 'p') {
+  }
+  else if (key == 'o') {
+    // pressing ¨'o' changes the colors
+    redfill=255;
+    bluefill=100;
+    greenfill=50;
+    red = 130;
+    green = 45;
+    blue = 176;
+    sample.trigger();
+  }
+  else if (key == 'l') {
+    // pressing ¨'l' changes the colors
+    redfill=60;
+    bluefill=90;
+    greenfill=110;
+    red = 88;
+    green = 255;
+    blue = 255;
+  }
+  else if (key == 'i') {
+    // pressing ¨'i' changes the colors
+    redfill=110;
+    bluefill=200;
+    greenfill=10;
+    red = 60;
+    green = 40;
+    blue = 30;
+  }
+  else if (key == 'r') {
+    // ... trigger the horn sample
+    sample.trigger();
+  }
+}
+
+void stop() {
+  // always close Minim audio classes
+  sample.close();
+  // always stop Minim before exiting
+  minim.stop();
+  // The super.stop() makes sure that all the normal cleanup routines are done
+  super.stop();
+}
