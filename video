@@ -1,0 +1,21 @@
+import processing.video.*;
+Movie myMovie;
+
+void setup() {
+  size(640,480);
+  myMovie = new Movie(this, "olli.mov");
+myMovie.loop();
+myMovie.speed(1);
+
+}
+void draw() {
+  tint(255, 20);
+  image(myMovie, 0,0);
+  myMovie.speed = map(mouseX, 0, width, 0, 1);
+  myMovie.speed(videoSpeed);
+}
+
+// Called every time a new frame is available to read
+void movieEvent(Movie m) {
+  m.read();
+}
